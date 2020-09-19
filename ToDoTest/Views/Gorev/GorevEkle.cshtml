@@ -1,0 +1,57 @@
+﻿@model ToDoTest.Models.gorevler
+@{
+    ViewData["Title"] = "Görev Ekle";
+}
+
+<h1>Görev Ekle</h1>
+
+<form class="form-group" method="post">
+
+
+    <div class="row">
+        <div class="col-6">
+            <b>Durumu</b>
+            <br />
+            <select asp-for="Durumu" class="form-control">
+                <option>Normal</option>
+                <option>Yapıldı</option>
+                <option>Acil</option>
+            </select>
+        </div>
+        <div class="col-6">
+            <b>Son Tarih</b>
+            <br />
+            <input class="form-control" asp-for="OlusturmaTarihi" /><br />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <b>Firma</b>
+            <br />
+            <select asp-for="Firma" class="form-control">
+                @foreach (var f in Ayarlar.Firmalar())
+                {
+                    <option value="@f.ID">@f.FirmaAdi</option>
+                }
+            </select>
+        </div>
+        <div class="col-6">
+            <b>Sorumlu Personel</b>
+            <select asp-for="KullaniciID" class="form-control">
+                @foreach (var k in Ayarlar.Kullanicilar())
+                {
+                    <option value="@k.ID">@k.PersonelAd</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <b>Görev Açıklaması</b>
+            <br />
+            <textarea rows="4" class="form-control" asp-for="GorevDetay"></textarea><br />
+        </div>
+    </div>
+        <button class="btn btn-warning">Görev Ekle</button>
+</form>

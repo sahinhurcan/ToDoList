@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Kullanıcılar";
+}
+
+<h4>Kullanıcılar</h4>
+@using ToDoTest.Models
+@model List<kullanicilar>
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>PersonelAd</th>
+        <th>YetkiID</th>
+        <th>KullaniciAdi</th>
+        <th>Sifre</th>
+        <th></th>
+    </tr>
+    @foreach (var k in Model)
+    {
+        string yetki = "";
+        @if (@k.YetkiID == 1)
+        {
+            yetki = "Sistem Yöneticisi";
+        }
+        <tr>
+            <th>@k.ID</th>
+            <td>@k.PersonelAd</td>
+
+            <td>@yetki</td>
+            <td>@k.KullaniciAdi</td>
+            <td>@k.Sifre</td>
+            <td>
+                <a href="/kullanici/KullaniciGetir/@k.ID" class="btn btn-warning"> Düzenle </a>
+                <a href="/kullanici/KullaniciSil/@k.ID" class="btn btn-danger"> SİL </a>
+            </td>
+        </tr>
+    }
+</table>
+<a href="/kullanici/KullaniciEkle" class="btn btn-danger">Kullanıcı Ekle</a>
+

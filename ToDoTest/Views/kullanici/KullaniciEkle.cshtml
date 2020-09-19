@@ -1,0 +1,24 @@
+﻿@model ToDoTest.Models.kullanicilar
+@{
+    ViewData["Title"] = "KullaniciEkle";
+}
+
+<h3>Görevler</h3>
+
+<h1>KullaniciEkle</h1>
+
+<form class="form-group" method="post">
+    <b>Ad Soyad</b>
+    <br />
+    @Html.TextBoxFor(k => k.PersonelAd, new { @class = "form-control" })
+    <b>Yetki Türü</b>
+    <br />
+    @Html.TextBoxFor(k => k.YetkiID, new { @class = "form-control" })
+    <b>Kullanıcı Adı</b>
+    <br />
+    @Html.TextBoxFor(k => k.KullaniciAdi, new { @class = "form-control" })
+    <b>Şifre</b>
+    <br />
+    @Html.TextBoxFor(k => k.Sifre, new { @class = "form-control" })
+    <button class="btn btn-warning">Kullanıcı Ekle</button>
+</form>

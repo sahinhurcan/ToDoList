@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+@using ToDoTest.Models
+@model List<gorevler>
+
+
+<h3>Size Atanan Görevler</h3>
+<table class="table table-bordered">
+    <tr class="table-active">
+        <th>ID</th>
+        <th>Görev</th>
+        <th>Son Tarih</th>
+        <th>Durumu</th>
+        <th>Firma</th>
+        <th></th>
+    </tr>
+
+    @foreach (var g in Model)
+    {
+        if (g.KullaniciID == @ViewBag.userID)
+        {
+
+            if (@g.Durumu == "Acil")
+            {
+
+                <tr class="table-danger">
+                    <th>@g.id</th>
+                    <td>@g.GorevDetay</td>
+                    <td>@g.OlusturmaTarihi</td>
+                    <td>@g.Durumu</td>
+                    <td>@g.Firma</td>
+                    <td>
+                        <a href="/Gorev/GorevGetir/@g.id" class="btn btn-warning"> Düzenle </a>
+                        <a href="/Gorev/GorevSil/@g.id" class="btn btn-danger"> SİL </a>
+                        <a href="/Gorev/YapildiIsaretle/@g.id" class="btn btn-success">Yapıldı İşaretle</a>
+                    </td>
+                </tr>
+            }
+            else if (@g.Durumu == "Normal")
+            {
+
+                <tr class="table-info">
+                    <th>@g.id</th>
+                    <td>@g.GorevDetay</td>
+                    <td>@g.OlusturmaTarihi</td>
+                    <td>@g.Durumu</td>
+                    <td>@g.Firma</td>
+                    <td>
+                        <a href="/Gorev/GorevGetir/@g.id" class="btn btn-warning"> Düzenle </a>
+                        <a href="/Gorev/GorevSil/@g.id" class="btn btn-danger"> SİL </a>
+                        <a href="/Gorev/YapildiIsaretle/@g.id" class="btn btn-success">Yapıldı İşaretle</a>
+                    </td>
+                </tr>
+            }
+            else if (@g.Durumu == "")
+            {
+
+                <tr class="table-warning">
+                    <th>@g.id</th>
+                    <td>@g.GorevDetay</td>
+                    <td>@g.OlusturmaTarihi</td>
+                    <td>@g.Durumu</td>
+                    <td>@g.Firma</td>
+                    <td>
+                        <a href="/Gorev/GorevGetir/@g.id" class="btn btn-warning"> Düzenle </a>
+                        <a href="/Gorev/GorevSil/@g.id" class="btn btn-danger"> SİL </a>
+                        <a href="/Gorev/YapildiIsaretle/@g.id" class="btn btn-success">Yapıldı İşaretle</a>
+                    </td>
+                </tr>
+            }
+        }
+    }
+
+</table>

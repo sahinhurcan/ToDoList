@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewData["Title"] = "Görevler";
+}
+
+<h1>Görev Listesi</h1>
+<a href="/Gorev/GorevEkle" class="btn btn-success"> Yeni Görev Ekle</a>
+<br />
+<br />
+
+@using ToDoTest.Models
+@model List<gorevler>
+
+
+<table class="table table-bordered">
+    <tr class="table-active">
+        <th>ID</th>
+        <th>Görev</th>
+        <th>Son Tarih</th>
+        <th>Durumu</th>
+        <th>Firma</th>
+        <th></th>
+    </tr>
+    @foreach (var g in Model)
+    {
+        if (g.Firma != null)
+        {
+            string firmaadi = Ayarlar.FirmaGetir(g.Firma);
+            if (@g.Durumu == "Acil")
+            {
+
+
+
+                <tr class="table-danger">
+                    <th>@g.id</th>
+                    <td>@g.GorevDetay</td>
+                    <td>@g.OlusturmaTarihi</td>
+                    <td>@g.Durumu</td>
+                    <td>@firmaadi</td>
+                    <td>
+                        <a href="/Gorev/GorevGetir/@g.id" class="btn btn-warning"> Düzenle </a>
+                        <a href="/Gorev/GorevSil/@g.id" class="btn btn-danger"> SİL </a>
+                        <a href="/Gorev/YapildiIsaretle/@g.id" class="btn btn-success">Yapıldı İşaretle</a>
+                    </td>
+                </tr>
+            }
+            else if (@g.Durumu == "Normal")
+            {
+                <tr class="table-info">
+                    <th>@g.id</th>
+                    <td>@g.GorevDetay</td>
+                    <td>@g.OlusturmaTarihi</td>
+                    <td>@g.Durumu</td>
+                    <td>@firmaadi</td>
+                    <td>
+                        <a href="/Gorev/GorevGetir/@g.id" class="btn btn-warning"> Düzenle </a>
+                        <a href="/Gorev/GorevSil/@g.id" class="btn btn-danger"> SİL </a>
+                        <a href="/Gorev/YapildiIsaretle/@g.id" class="btn btn-success">Yapıldı İşaretle</a>
+                    </td>
+                </tr>
+            }
+        }
+        else if (g.Durumu != "Yapıldı")
+        {
+            <tr class="table-warning">
+                <th>@g.id</th>
+                <td>@g.GorevDetay</td>
+                <td>@g.OlusturmaTarihi</td>
+                <td>@g.Durumu</td>
+                <td>
+                    Atanmamış
+                </td>
+                <td>
+                    <a href="/Gorev/GorevGetir/@g.id" class="btn btn-warning"> Düzenle </a>
+                    <a href="/Gorev/GorevSil/@g.id" class="btn btn-danger"> SİL </a>
+                    <a href="/Gorev/YapildiIsaretle/@g.id" class="btn btn-success">Yapıldı İşaretle</a>
+                </td>
+            </tr>
+        }
+
+    }
+
+</table>
+
+<h3>Tamamlanmış Görevler</h3>
+<table class="table table-bordered">
+    <tr class="table-active">
+        <th>ID</th>
+        <th>Görev</th>
+        <th>Son Tarih</th>
+        <th>Durumu</th>
+        <th>Firma</th>
+        <th></th>
+    </tr>
+
+    @foreach (var g in Model){
+
+        if (g.Firma != null)
+        {
+            string firmaadi = Ayarlar.FirmaGetir(g.Firma);
+
+            if (@g.Durumu == "Yapıldı")
+            {
+
+                <tr class="table-success">
+                    <th>@g.id</th>
+                    <td>@g.GorevDetay</td>
+                    <td>@g.OlusturmaTarihi</td>
+                    <td>@g.Durumu</td>
+                    <td>@firmaadi</td>
+                    <td>
+                        <a href="/GoreFirmav/GorevGetir/@g.id" class="btn btn-warning"> Düzenle </a>
+                        <a href="/Gorev/GorevSil/@g.id" class="btn btn-danger"> SİL </a>
+                    </td>
+                </tr>
+            }
+        }
+    }
+
+</table>

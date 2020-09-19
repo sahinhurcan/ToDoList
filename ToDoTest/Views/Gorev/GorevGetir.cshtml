@@ -1,0 +1,33 @@
+﻿@model ToDoTest.Models.gorevler
+
+@{
+    ViewData["Title"] = "GorevGetir";
+}
+
+<h1>GorevGetir</h1>
+
+
+@using (Html.BeginForm("GorevGuncelle", "Gorev", FormMethod.Post))
+{
+    @Html.TextBoxFor(g => g.id, new { @class = "form-control" })
+
+    <b>Görev Açıklaması</b>
+    <br />
+    <input class="form-control" asp-for="GorevDetay" />
+    <br />
+    <b>Durumu</b>
+    <br />
+    <select asp-for="Durumu" class="form-control">
+        <option>Normal</option>
+        <option>Yapıldı</option>
+        <option>Acil</option>
+    </select>
+    <b>Son Tarih</b>
+    <br />
+    <input class="form-control" asp-for="OlusturmaTarihi" />
+    <br />
+    <b>Firma</b>
+    <br />
+    @Html.TextBoxFor(g => g.Firma, new { @class = "form-control" })
+    <button class="btn btn-warning">Görev Güncelle</button>
+}

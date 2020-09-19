@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<title>@ViewData["Title"] - ToDoTest</title>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+
+<body>
+    <!-- Sidebar -->
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:15%">
+
+        <h3 class="w3-bar-item">Firmalar</h3>
+        @foreach (var f in Ayarlar.Firmalar())
+        {
+            <a href="/Gorev/FirmaGorevleri?frm=@f.ID" class="w3-bar-item w3-button">@f.FirmaAdi</a>
+        }
+
+        <br />
+        <div class="row">
+
+            <div class="col-9 px-1">
+
+                <input required class="w3-bar-item" type="text" placeholder="Firma Eklemek için Yazınız" id="firma" name="firma">
+
+            </div>
+
+            <div class="col-3 px-1">
+
+                <button onclick="FirmaEkle()" class="btn btn-info">Ekle</button>
+
+            </div>
+
+        </div>
+    
+
+
+        <script>
+
+            
+             
+
+            function FirmaEkle() {
+                $.ajax({
+                    type: "POST",
+                    "datatype": "json",
+                    url: '/Firma/FirmaEkle?firma=' + $('#firma').val(),
+                    success: function (gt) {
+                        if (gt.success) {
+
+                            window.location.reload();
+                        }
+
+
+                    }
+
+                });
+            }
+
+
+        </script>
+
+    </div>
+
+    <!-- Page Content -->
+    <div style="margin-left:15%">
+
+        <div class="w3-container w3-teal">
+            <h1>@ViewData["Title"]</h1>
+            <a class="text-white" asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+            <span> - </span>
+            <a class="text-white" asp-area="" asp-controller="Gorev" asp-action="Index">Görevler</a>
+            <span> - </span>
+            <a class="text-white" asp-area="" asp-controller="kullanici" asp-action="Index">Kullanıcılar</a>
+            <span>  | </span>
+            <a class="btn btn-sm btn-danger" asp-area="" asp-controller="Login" asp-action="CikisYap">Çıkış</a>
+        </div>
+        <div class="w3-container">
+            @RenderBody()
+        </div>
+    </div>
+    
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
